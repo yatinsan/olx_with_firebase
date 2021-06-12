@@ -4,22 +4,31 @@ import Logo from '../../olx-logo.png';
 import './Signup.css';
 import { firebaseconext } from '../config/firebasecontext';
 import { Firebase } from '../config/firebase';
+import {useHistory} from 'react-router-dom'
+
+
+
 
 
 export default function Signup() {
+  const history = useHistory()
 
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
   const [password, setPassword] = useState('')
   const [err, setErr] = useState('')
+  const [user, setuser] = useState('')
   // const Firebase = useContext(firebaseconext)
 
-  const signupfire= (e)=>{
+  const signupfire = async (e) => {
     e.preventDefault()
-    Firebase.auth().createUserWithEmailAndPassword(email,password).then((res)=>{res.user.updateProfile({displayName:username,})}).catch((err)=>{setErr(err.message)})
-
+    setErr('')
+    Firebase.auth().createUserWithEmailAndPassword(email, password)
+    .then((res) => { setuser(res); res.user.updateProfile({userid:res.user.uid , displayName: username, }) })
+    .catch((err) => { setErr(err.message)})
     
+    await console.log(err)
   }
 
   return (
@@ -31,50 +40,24 @@ export default function Signup() {
         <form className='wdmob'>
           <label htmlFor="fname">Username</label>
           <br />
-          <input
-            onChange={(e)=>{setUsername(e.target.value)}}
-            className="input"
-            type="text"
-            id="fname"
-            name="name"
-            defaultValue="John"
-          />
+          <input onChange={(e) => { setUsername(e.target.value) }}
+            className="input" type="text" id="fname" name="name"  />
           <br />
-          <label htmlFor="fname">Email</label>
+          <label htmlFor='email'>Email</label>
           <br />
-          <input
-         onChange={(e)=>{setEmail(e.target.value)}}
-            className="input"
-            type="email"
-            id="fname"
-            name="email"
-            defaultValue="John"
-          />
+          <input onChange={(e) => { setEmail(e.target.value) }}
+            className="input" type="email" id="email" name="email" value={email} />
           <br />
-          <label htmlFor="lname">Phone</label>
+          <label htmlFor="phone">Phone</label>
           <br />
-          <input
-          onChange={(e)=>{setPhone(e.target.value)}}
-            className="input"
-            type="number"
-            id="lname"
-            name="phone"
-            defaultValue="Doe"
-          />
+          <input onChange={(e) => { setPhone(e.target.value) }} className="input" type="number" id="phone" name="phone" value={phone} />
           <br />
-          <label htmlFor="lname">Password</label>
+          <label htmlFor="">Password</label>
           <br />
-          <input
-          onChange={(e)=>{setPassword(e.target.value)}}
-            className="input"
-            type="password"
-            id="lname"
-            name="password"
-            defaultValue="Doe"
-          />
+          <input onChange={(e) => { setPassword(e.target.value) }} className="input" type="password" id="lname" name="password" value={password} />
           <br />
           {err && <span className='red'>{err}</span>}
-          <button  onClick={signupfire}>Signup</button>
+          <button onClick={signupfire}>Signup</button>
         </form>
         <a href='.././'>Login</a>
       </div>

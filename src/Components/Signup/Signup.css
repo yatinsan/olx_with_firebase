@@ -52,4 +52,7 @@ input {
 
 .red {
     color: red;
+    width: 300px;
+    font-size: small;
+    display: inline-block;
 }

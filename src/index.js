@@ -5,9 +5,10 @@ import { Firebase } from './Components/config/firebase';
 import {firebaseconext} from './Components/config/firebasecontext'
 
 ReactDOM.render(
-<firebaseconext.Provider value={(Firebase)}>
+ <firebaseconext.Provider value={(Firebase)}>
 
 <App />
+
 </firebaseconext.Provider>
 
 
