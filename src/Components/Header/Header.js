@@ -6,7 +6,10 @@ import Search from '../../assets/Search';
 import Arrow from '../../assets/Arrow';
 import SellButton from '../../assets/SellButton';
 import SellButtonPlus from '../../assets/SellButtonPlus';
+import {useHistory } from 'react-router-dom';
 function Header() {
+
+ const history = useHistory()
   return (
     <div className="headerParentDiv">
       <div className="headerChildDiv">
@@ -34,7 +37,8 @@ function Header() {
           <Arrow></Arrow>
         </div>
         <div className="loginPage">
-          <span>Login</span>
+          <span onClick={()=>{history.push('/signup')}} >Login</span>
+    
           <hr />
         </div>
 
