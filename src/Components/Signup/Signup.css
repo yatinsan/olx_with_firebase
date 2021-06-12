@@ -54,5 +54,5 @@ input {
     color: red;
     width: 300px;
     font-size: small;
-    display: inline-block;
+    display: inline-flex;
 }

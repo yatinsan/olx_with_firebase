@@ -25,10 +25,14 @@ export default function Signup() {
     e.preventDefault()
     setErr('')
     Firebase.auth().createUserWithEmailAndPassword(email, password)
-    .then((res) => { setuser(res); res.user.updateProfile({userid:res.user.uid , displayName: username, }) })
-    .catch((err) => { setErr(err.message)})
+    .then((res) => { setuser(res); res.user.updateProfile({userid:res.user.uid , displayName: username, });history.push({pathname:'/'}) })
+    .catch((err) => {
+      if(err.code==='auth/email-already-in-use'){setErr('Email alredy used')}
+      else{ setErr(err.message)}      
+       console.log(err)
+      })
     
-    await console.log(err)
+  
   }
 
   return (
@@ -41,7 +45,7 @@ export default function Signup() {
           <label htmlFor="fname">Username</label>
           <br />
           <input onChange={(e) => { setUsername(e.target.value) }}
-            className="input" type="text" id="fname" name="name"  />
+            className="input" type="text" id="fname" name="name"  placeholder="user name"/>
           <br />
           <label htmlFor='email'>Email</label>
           <br />
@@ -57,9 +61,10 @@ export default function Signup() {
           <input onChange={(e) => { setPassword(e.target.value) }} className="input" type="password" id="lname" name="password" value={password} />
           <br />
           {err && <span className='red'>{err}</span>}
+          <br />
           <button onClick={signupfire}>Signup</button>
         </form>
-        <a href='.././'>Login</a>
+        <a href='/login'>Login</a>
       </div>
     </div>
   );
