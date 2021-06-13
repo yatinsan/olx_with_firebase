@@ -21,7 +21,7 @@ export default function Signup() {
   const [user, setuser] = useState('')
   // const Firebase = useContext(firebaseconext)
 
-  const signupfire = async (e) => {
+  const signupfire = (e) => {
     e.preventDefault()
     setErr('')
     Firebase.auth().createUserWithEmailAndPassword(email, password)

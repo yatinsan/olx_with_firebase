@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import './App.css';
 
 /**
@@ -8,8 +8,26 @@ import Home from './Pages/Home';
 import { BrowserRouter,Switch,Route } from 'react-router-dom'
 import SignupPage from './Pages/Signup';
 import LoginPage from './Pages/Login';
+import {authcontext, firebaseconext} from './Components/config/firebasecontext'
+import {Firebase} from './Components/config/firebase'
+
+
+
+
 
 function App() {
+
+  // const firebase=firebaseconext
+
+const {setuser}= useContext(authcontext)
+
+
+useEffect(() => {
+  Firebase.auth().onAuthStateChanged((user)=>{setuser(user); console.log(user.displayName)})
+  
+  
+}, [])
+
   return (
     <BrowserRouter>
       <Switch>
