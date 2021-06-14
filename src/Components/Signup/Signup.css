@@ -46,9 +46,7 @@ input {
     justify-content: center;
 }
 
-.wdmob button {
-    margin-top: 20px;
-}
+.wdmob button {}
 
 .red {
     color: red;

@@ -3,7 +3,7 @@ import React, { useContext, useState } from 'react';
 import Logo from '../../olx-logo.png';
 import './Signup.css';
 import { firebaseconext } from '../config/firebasecontext';
-import { Firebase } from '../config/firebase';
+import { Firebase, provider } from '../config/firebase';
 import {useHistory} from 'react-router-dom'
 
 
@@ -25,15 +25,20 @@ export default function Signup() {
     e.preventDefault()
     setErr('')
     Firebase.auth().createUserWithEmailAndPassword(email, password)
-    .then((res) => { setuser(res); res.user.updateProfile({userid:res.user.uid , displayName: username, });history.push({pathname:'/'}) })
+    .then((res) => { setuser(res); res.user.updateProfile({ displayName: username, });history.push({pathname:'/'})
+    Firebase.firestore().collection('user').add({userid:res.user.uid}) })
     .catch((err) => {
       if(err.code==='auth/email-already-in-use'){setErr('Email alredy used')}
       else{ setErr(err.message)}      
        console.log(err)
       })
-    
-  
   }
+  const GoogleSignin = (e) => {
+    e.preventDefault()
+    Firebase.auth().signInWithPopup(provider)
+        .then((data) => { console.log(data);history.push({ pathname: '/' }) })
+        .catch((err) => { console.log(err) })
+}
 
   return (
     <div>
@@ -63,6 +68,7 @@ export default function Signup() {
           {err && <span className='red'>{err}</span>}
           <br />
           <button onClick={signupfire}>Signup</button>
+          <button onClick={GoogleSignin} >Login with google</button>
         </form>
         <a href='/login'>Login</a>
       </div>
