@@ -2,11 +2,9 @@ import React, { useContext, useState } from 'react';
 
 import Logo from '../../olx-logo.png';
 import './Signup.css';
-import { firebaseconext } from '../config/firebasecontext';
+// import { firebaseconext } from '../config/firebasecontext';
 import { Firebase, provider } from '../config/firebase';
 import {useHistory} from 'react-router-dom'
-
-
 
 
 
@@ -18,14 +16,13 @@ export default function Signup() {
   const [phone, setPhone] = useState('')
   const [password, setPassword] = useState('')
   const [err, setErr] = useState('')
-  const [user, setuser] = useState('')
   // const Firebase = useContext(firebaseconext)
 
   const signupfire = (e) => {
     e.preventDefault()
     setErr('')
     Firebase.auth().createUserWithEmailAndPassword(email, password)
-    .then((res) => { setuser(res); res.user.updateProfile({ displayName: username, });history.push({pathname:'/'})
+    .then((res) => {  res.user.updateProfile({ displayName: username, });history.push({pathname:'/'})
     Firebase.firestore().collection('user').add({userid:res.user.uid}) })
     .catch((err) => {
       if(err.code==='auth/email-already-in-use'){setErr('Email alredy used')}

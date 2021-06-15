@@ -2,6 +2,7 @@ import firebase from "firebase/app";
 import 'firebase/auth'
 import 'firebase/database'
 import 'firebase/firestore'
+import 'firebase/storage'
 import { useHistory } from 'react-router-dom'
 import React from "react";
 
@@ -20,12 +21,3 @@ const firebaseConfig = {
 export const Firebase = firebase.initializeApp(firebaseConfig)
 
 export const provider = new firebase.auth.GoogleAuthProvider()
-
-
-
-export const GoogleSignin = (e) => {
-    e.preventDefault()
-    Firebase.auth().signInWithPopup(provider)
-        .then((data) => { console.log(data) })
-        .catch((err) => { console.log(err) })
-}
