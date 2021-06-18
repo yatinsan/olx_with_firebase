@@ -89,12 +89,12 @@ function Header() {
               <div class="rui-3P6Ei rui-1-t_r rui-urkah rui-3Rldd">OLX is built on trust. Help other people get to know you. Tell them about the things you like.</div>
             </a>
             <div class="_1Up9t" data-aut-id="menu">
-              <a class="_243cz" rel="nofollow" data-aut-id="btnProfileMyAds" href="/myads">
+              <a class="_243cz" rel="nofollow" data-aut-id="btnProfileMyAds" href="/addProduct">
                 <div class="cfoYk"><svg width="23px" height="23px" viewBox="0 0 1024 1024" data-aut-id="icon" class="" fill-rule="evenodd">
                   <path class="rui-77aaa" d="M349.46 85.333h487.619l40.635 40.635v609.524l-40.635 40.635h-487.619l-40.635-40.635v-609.524l40.635-40.635zM390.095 694.857h406.35v-528.254h-406.35v528.254zM146.286 247.873l40.635-40.635 40.635 40.635v609.524h528.254l40.635 40.635-40.635 40.635h-568.889l-40.635-40.635v-650.159zM512 329.143h162.54l40.635 40.635-40.635 40.635h-162.54l-40.635-40.635 40.635-40.635zM512 491.683h81.27l40.635 40.635-40.635 40.635h-81.27l-40.635-40.635 40.635-40.635z"></path>
                 </svg>
                 </div>
-                <span>My Ads</span>
+                <span>addProduct</span>
               </a>
               <a class="_243cz" rel="nofollow" data-aut-id="btnShowBusiessPacakges" href="/payments/businesspackages/my_account">
                 <div class="cfoYk"><svg width="23px" height="23px" viewBox="0 0 1024 1024" data-aut-id="icon" class="" fill-rule="evenodd">
