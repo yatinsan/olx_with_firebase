@@ -146,6 +146,7 @@
     font-weight: 700;
     letter-spacing: 0.5px;
     color: #002f34;
+    align-items: center;
 }
 
 
@@ -188,4 +189,8 @@
     display: flex;
     align-items: center;
     height: 40px;
+}
+
+.nodis {
+    display: none;
 }

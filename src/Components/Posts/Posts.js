@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Heart from '../../assets/Heart';
 import './Post.css';
 import { Firebase } from '../config/firebase'
+import Post from './post'
 
 function Posts() {
 
@@ -13,6 +14,8 @@ function Posts() {
     Firebase.firestore().collection('postes').get()
       .then(async(res) => { const products =await res.docs.map((sna) => { return { ...sna.data(), id: sna.id } }); setPostes(products) })
   }, [])
+
+  const [like, setLike] = useState(false)
 
 
   return (
@@ -27,22 +30,7 @@ function Posts() {
           { postes.map(res => {
 
 
-            return(<div className="card"          >
-            <div className="favorite">
-              <Heart></Heart>
-            </div>
-            <div className="image">
-              <img src={res.imageurl} alt="" />
-            </div>
-            <div className="content">
-              <p className="rate">&#x20B9; {res.price}</p>
-              <span className="kilometer">{res.name}</span>
-              <p className="name"> {res.category}</p>
-            </div>
-            <div className="date">
-              <span>{res.createdAt}</span>
-            </div>
-          </div>)
+            return(<Post res={res}></Post>)
           })}
         </div>
       </div>

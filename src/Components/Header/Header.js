@@ -9,6 +9,9 @@ import SellButtonPlus from '../../assets/SellButtonPlus';
 import { useHistory } from 'react-router-dom';
 import { authcontext } from '../config/firebasecontext'
 import { Firebase } from '../config/firebase'
+
+
+
 function Header() {
 
 
@@ -41,7 +44,7 @@ function Header() {
         </div>
         <div className="language">
           <span> ENGLISH </span>
-          <svg onClick={()=>{setnav(!nav)}}
+          <svg className='downArrow' onClick={()=>{setnav(!nav)}}
         width="24px"
         height="24px"
         viewBox="0 0 1024 1024"
@@ -53,8 +56,8 @@ function Header() {
           className="rui-77aaa"
           d="M85.392 277.333h60.331l366.336 366.336 366.336-366.336h60.331v60.331l-408.981 409.003h-35.307l-409.045-409.003z"
         />
-      </svg>{nav? 
-          <div class="dropel">
+      </svg>{
+          <div class={nav ? "dropel" : 'nodis'} id="dropel">
             <div class="_3hG1N" data-aut-id="profile">
               <figure class="rui-D_EoZ _2hlS-"></figure>
               <a class="_2c-2r" data-aut-id="loggedUser">
@@ -133,12 +136,12 @@ function Header() {
               
             </div>
           </div>
-        : null }
+        }
        </div>
         <div className="loginPage">
-          <span onClick={() => { user ? Firebase.auth().signOut() : history.push('/login') }} >{user ? 'Logout' : 'login'}</span>
+         { user ? <img onClick={() =>{setnav(!nav)}}src="../../../Images/147144.png" alt="avathar" width='50px' /> :(<span onClick={() => { history.push('/login') }} >{user ? 'Logout' : 'login'}</span>)}
 
-          <hr />
+        
         </div>
 
         <div onClick={() => { user ? history.push({ pathname: '/addProduct' }) : history.push({ pathname: '/login' }) }} className="sellMenu">
