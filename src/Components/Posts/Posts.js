@@ -11,8 +11,8 @@ function Posts() {
 
   useEffect(() => {
 
-    Firebase.firestore().collection('postes').get()
-      .then(async(res) => { const products =await res.docs.map((sna) => { return { ...sna.data(), id: sna.id } }); setPostes(products) })
+    Firebase.firestore().collection('postes').onSnapshot(async(res) => { const products =await res.docs.map((sna) => { return { ...sna.data(), id: sna.id } }); setPostes(products) })
+      
   }, [])
 
   const [like, setLike] = useState(false)
