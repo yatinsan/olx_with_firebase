@@ -194,3 +194,10 @@
 .nodis {
     display: none;
 }
+
+.searchdown {
+    background-color: white;
+    position: relative;
+    left: 0;
+    right: 0;
+}

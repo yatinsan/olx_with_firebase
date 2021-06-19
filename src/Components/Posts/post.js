@@ -2,12 +2,18 @@ import React, { useContext, useEffect, useState } from 'react'
 import {Firebase} from '../config/firebase'
 import firebase from 'firebase' 
 import {authcontext} from '../config/firebasecontext'
+import {useHistory} from 'react-router-dom'
+import {postConstruct} from '../config/viewpostcontext'
 
 function Post({res}) {
+
+    const {setPostView} = useContext(postConstruct)
     const [likes, setLikes] = useState([])
+    const history = useHistory()
     useEffect(() => {
         user && Firebase.firestore().collection('olxusers').doc(user.uid).collection('favorite').get().then((snapshot) => {setLikes(snapshot.docs.map(doc =>({...doc.data()})))})
-        console.log(Firebase.firestore().collection('olxusers').doc(user.uid).collection('favorite').isEqual(res.id))
+        Firebase.firestore().collection('olxusers').doc(user.uid).collection('favorite').where('fav','==',res.id).get().then(res => {setLike(res.docs.map(snap=>{snap.data()}).length)})
+        
         // console.log(Firebase.database().ref('olxusers').orderByKey().isEqual())
     }, [])
 
@@ -30,9 +36,9 @@ function Post({res}) {
         <div className="card"    key={res.id}      >
             <div className="favorite">
               {/* <Heart></Heart> */}
-              <i onClick={likeHandler} class={like?'bi bi-heart-fill heart hrred':'bi bi-heart heart'}></i>
+              <i onClick={likeHandler} className={like?'bi bi-heart-fill heart hrred':'bi bi-heart heart'}></i>
             </div>
-            <div className="image">
+            <div onClick={()=>{setPostView(res);history.push({ pathname: '/ProductView' })}} className="image">
               <img src={res.imageurl} alt="" />
             </div>
             <div className="content">

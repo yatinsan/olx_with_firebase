@@ -1,18 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import {postConstruct} from '../config/viewpostcontext'
 
 import './View.css';
 function View() {
+ const {postView} = useContext(postConstruct)
   return (
     <div className="viewParentDiv">
       <div className="imageShowDiv">
         <img
-          src="../../../Images/R15V3.jpg"
+          src={postView.imageurl}
           alt=""
         />
       </div>
       <div className="rightSection">
         <div className="productDetails">
-          <p>&#x20B9; 250000 </p>
+          <p>&#x20B9; {postView.price} </p>
           <span>YAMAHA R15V3</span>
           <p>Two Wheeler</p>
           <span>Tue May 04 2021</span>

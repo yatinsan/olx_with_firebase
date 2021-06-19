@@ -23,7 +23,7 @@ export default function Signup() {
     setErr('')
     Firebase.auth().createUserWithEmailAndPassword(email, password)
     .then((res) => {  res.user.updateProfile({ displayName: username, });history.push({pathname:'/'})
-    Firebase.firestore().collection('olxusers').doc(res.user.uid).set({userid:res.user.uid,phone,fav:[]}) })
+    Firebase.firestore().collection('olxusers').doc(res.user.uid).set({userid:res.user.uid,phone,email}); })
     .catch((err) => {
       if(err.code==='auth/email-already-in-use'){setErr('Email alredy used')}
       else{ setErr(err.message)}      

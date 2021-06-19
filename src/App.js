@@ -11,6 +11,8 @@ import LoginPage from './Pages/Login';
 import { authcontext, firebaseconext } from './Components/config/firebasecontext'
 import { Firebase } from './Components/config/firebase'
 import Create from './Components/Create/Create';
+import Post from './Components/config/viewpostcontext'
+import ProductView from './Pages/ViewPost'
 
 
 
@@ -30,6 +32,7 @@ function App() {
   }, [])
 
   return (
+    <Post>
     <BrowserRouter>
       <Switch>
         <Route exact path='/'>
@@ -46,8 +49,12 @@ function App() {
         <Route path="/addProduct">
           <Create />
         </Route>
+        <Route path="/ProductView">
+          <ProductView/>
+        </Route>
       </Switch>
     </BrowserRouter>
+    </Post>
   );
 }
 
