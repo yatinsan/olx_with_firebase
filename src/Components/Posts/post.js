@@ -5,21 +5,24 @@ import {authcontext} from '../config/firebasecontext'
 import {useHistory} from 'react-router-dom'
 import {postConstruct} from '../config/viewpostcontext'
 
-function Post({res}) {
-
+function Post({res, editor}) {
+  const {user} = useContext(authcontext)
+    const fvdb = user ? Firebase.firestore().collection('olxusers').doc(user.uid).collection('favorite') : null
     const {setPostView} = useContext(postConstruct)
     const [likes, setLikes] = useState([])
     const history = useHistory()
+    const [like, setLike] = useState(false)
     useEffect(() => {
-        user && Firebase.firestore().collection('olxusers').doc(user.uid).collection('favorite').get().then((snapshot) => {setLikes(snapshot.docs.map(doc =>({...doc.data()})))})
-        Firebase.firestore().collection('olxusers').doc(user.uid).collection('favorite').where('fav','==',res.id).get().then(res => {setLike(res.docs.map(snap=>{snap.data()}).length)})
+        // user && Firebase.firestore().collection('olxusers').doc(user.uid).collection('favorite').get().then((snapshot) => {setLikes(snapshot.docs.map(doc =>({...doc.data()})))})
+        // slower way
+        // fvdb.where('fav','==',res.id).get().then(res => {setLike(res.docs.map(snap=>{snap.data()}).length)})
+        // simple way
+       user && fvdb.doc(res.id).onSnapshot((snapshot) => {setLike(snapshot.exists)})     
         
         // console.log(Firebase.database().ref('olxusers').orderByKey().isEqual())
     }, [])
 
-    const [like, setLike] = useState(false)
-   
-    const {user} = useContext(authcontext)
+    
 
     const likeHandler =()=>{
 
@@ -32,8 +35,13 @@ function Post({res}) {
         like && Firebase.firestore().collection('olxusers').doc(user.uid).collection('favorite').doc(res.id).delete()
         like && setLike(false); 
     }
+
+    const deleteitem = (e)=>{
+      Firebase.firestore().collection('postes').doc(res.id).delete().catch((err)=>{console.log(err)}).then(()=>{console.log('delete')})
+      console.log(res.id)
+    }
     return (
-        <div className="card"    key={res.id}      >
+        <div className="card "     key={res.id}      >
             <div className="favorite">
               {/* <Heart></Heart> */}
               <i onClick={likeHandler} className={like?'bi bi-heart-fill heart hrred':'bi bi-heart heart'}></i>
@@ -46,6 +54,10 @@ function Post({res}) {
               <span className="kilometer">{res.name}</span>
               <p className="name"> {res.category}</p>
             </div>
+            {editor &&<div className="btfun">
+            <button type="button" class="btn btn-primary">Edit <i class="bi bi-pencil-square"></i></button>
+            <button onClick={deleteitem} type="button" class="btn btn-danger">Delete <i className="bi bi-trash-fill"></i></button>
+            </div>}
             <div className="date">
               <span>{res.createdAt}</span>
             </div>

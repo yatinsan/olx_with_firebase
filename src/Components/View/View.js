@@ -6,8 +6,8 @@ function View() {
  const {postView} = useContext(postConstruct)
   return (
     <div className="viewParentDiv">
-      <div className="imageShowDiv">
-        <img
+      <div  className="imageShowDiv">
+          <img className="img_vi"
           src={postView.imageurl}
           alt=""
         />

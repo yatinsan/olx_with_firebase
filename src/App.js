@@ -13,6 +13,7 @@ import { Firebase } from './Components/config/firebase'
 import Create from './Components/Create/Create';
 import Post from './Components/config/viewpostcontext'
 import ProductView from './Pages/ViewPost'
+import Edits from './Pages/Edits'
 
 
 
@@ -51,6 +52,9 @@ function App() {
         </Route>
         <Route path="/ProductView">
           <ProductView/>
+        </Route>
+        <Route path="/editProduct">
+          <Edits />
         </Route>
       </Switch>
     </BrowserRouter>

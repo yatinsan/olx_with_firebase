@@ -11,6 +11,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 20px;
 }
 
 .placeSearch {
@@ -93,8 +94,6 @@
     font-weight: bolder;
     margin-right: 5px;
 }
-
-.language svg {}
 
 .span {
     text-decoration: none;
@@ -200,4 +199,22 @@
     position: relative;
     left: 0;
     right: 0;
+}
+
+.cardsearch {
+    width: 100%!important;
+    max-width: 100%!important;
+    height: min-content!important;
+}
+
+.searcherr {
+    margin-bottom: 20px;
+}
+
+.resultbox {
+    border-radius: 5px;
+}
+
+.gggk {
+    background-color: rgb(193, 193, 193);
 }
